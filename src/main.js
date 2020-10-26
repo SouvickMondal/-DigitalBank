@@ -9,7 +9,7 @@ import Login from './components/loginComp/login.jsx'
 const store = configureStore();
 const jsx = (
     <Provider store={store}>
-        <Routing/>
+        <HomePage/>
     </Provider>
 );
 
