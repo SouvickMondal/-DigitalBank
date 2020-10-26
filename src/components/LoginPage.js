@@ -5,6 +5,7 @@ import {Route,NavLink,BrowserRouter as Router,Switch} from 'react-router-dom'
 import SetPassword from './loginComp/setPassword.jsx'
 import ForgotPassword from './loginComp/forgotPassword.jsx'
 import NotFoundErrorPage from './loginComp/notFound.jsx'
+import Profile from './ProfileComp/profile.jsx'
 // import HeaderComponent from './headerComp.jsx'
 // import './index.css'
 const Routing=()=>(
@@ -13,6 +14,7 @@ const Routing=()=>(
             <Route exact path="/" component={Login}/>
             <Route path="/setpassword" component={SetPassword}/>
             <Route path="/forgotpassword" component={ForgotPassword}/>
+            <Route path="/profile" component={Profile}></Route>
             <Route component={NotFoundErrorPage}/>
         </Switch>
     </Router>

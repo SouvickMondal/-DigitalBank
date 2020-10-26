@@ -1,20 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux';
 
-// import {UserAuthentication} from '../../authentication/userAuth.js'
-
 class Login extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            clientId:'',
-            password:''
+            clientId:''
         };
         this.onClickLoginButton=this.onClickLoginButton.bind(this);
         this.updateClientId=this.updateClientId.bind(this);
-        this.updatePassword=this.updatePassword.bind(this);
-        this.onClickSetPasswordButton=this.onClickSetPasswordButton.bind(this);
-        this.onClickForgotPasswordButton=this.onClickForgotPasswordButton.bind(this);
+        // this.updatePassword=this.updatePassword.bind(this);
+        // this.onClickSetPasswordButton=this.onClickSetPasswordButton.bind(this);
+        // this.onClickForgotPasswordButton=this.onClickForgotPasswordButton.bind(this);
      }
     
     updateClientId(e){
@@ -27,18 +24,26 @@ class Login extends React.Component{
     }
 
     onClickLoginButton(){
-        if(this.state.clientId && this.state.password){
+        if(this.state.clientId){
             console.log(this.state.clientId);
-            console.log(this.state.password);
+            // console.log(this.state.password);
             let clientVar=this.state.clientId;
-            let passwordVar=this.state.password;
+            // let passwordVar=this.state.password;
 
             let flag=true;
             for(let i=0;i<this.props.userData.length;i++){
-                if(this.props.userData[i].clientId == clientVar && this.props.userData[i].password == passwordVar){
+                if(this.props.userData[i].clientId == clientVar){
                     console.log("Success"); 
+                    localStorage.setItem("clientId",clientVar);
+                    localStorage.setItem("emailId",this.props.userData[i].emailId);
+                    localStorage.setItem("mobileNo",this.props.userData[i].mobileNo);
+                    localStorage.setItem("loanCategory",this.props.userData[i].loanCategory);
+                    localStorage.setItem("eligibleLoanAmount",this.props.userData[i].eligibleLoanAmount);
+                    let a=localStorage.getItem("clientId");
+                    console.log(`local item: ${a}`);
                     alert(`Welcome ${clientVar}`);
                     //Send the login data to the local storage
+                    this.props.history.push('/profile');
                     flag=!flag;
                     break;
                }
@@ -77,27 +82,27 @@ class Login extends React.Component{
         }
     }
 
-    onClickSetPasswordButton(){
+    // onClickSetPasswordButton(){
         
-        //redirect to set password page
-        this.props.history.push('./setpassword');
-    }
-    onClickForgotPasswordButton(){
-        //redirect to forgot password page
-        this.props.history.push('./forgotpassword');
+    //     //redirect to set password page
+    //     this.props.history.push('./setpassword');
+    // }
+    // onClickForgotPasswordButton(){
+    //     //redirect to forgot password page
+    //     this.props.history.push('./forgotpassword');
 
-    }
+    // }
 
     render(){
         return(
             <div>
                 <div style={{backgroundColor:"red",color:"white", border:"solid",width:"30%", textAlign:"center",borderBlock:"black",transform:"translateX(160%)",marginTop:"6%"}}>
                 Client ID: <input style={{ marginTop:"20%",marginBottom:"5%"}} type="text" onChange={this.updateClientId} /><br/>
-                Password: <input style={{ marginTop:"5%",marginBottom:"5%"}} type="password" onChange={this.updatePassword}/><br/>
+                {/* Password: <input style={{ marginTop:"5%",marginBottom:"5%"}} type="password" onChange={this.updatePassword}/><br/> */}
                 <button style={{ backgroundColor:"red",color:"white",marginTop:"5%",marginBottom:"20%",paddingRight:"7%",paddingLeft:"7%"}} id="loginButton" onClick={this.onClickLoginButton}>Login</button>
-                <p>Logging in for the first time?</p>
-                <button id="setPassword" onClick={this.onClickSetPasswordButton} style={{backgroundColor:"red",color:"white", marginBottom:"5%"}}>Set Password</button><br/>
-                <button style={{ backgroundColor:"red",color:"white",transform:"translateX(70%)",marginBottom:"5%",marginTop:"5%"}} onClick={this.onClickForgotPasswordButton}>Forgot Password?</button>
+                {/* <p>Logging in for the first time?</p> */}
+                {/* <button id="setPassword" onClick={this.onClickSetPasswordButton} style={{backgroundColor:"red",color:"white", marginBottom:"5%"}}>Set Password</button><br/> */}
+                {/* <button style={{ backgroundColor:"red",color:"white",transform:"translateX(70%)",marginBottom:"5%",marginTop:"5%"}} onClick={this.onClickForgotPasswordButton}>Forgot Password?</button> */}
                 {/* <h1>Client ID: {this.state.clientId}</h1>
                 <h1>Password: {this.state.password}</h1> */}
                 </div>
